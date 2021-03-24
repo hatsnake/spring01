@@ -3,6 +3,22 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- view와 관련되지 않은 객체 (Service, Repository, DB 비즈니스 로직과 관련된 설정 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="hatsnake"/>
+		<property name="password" value="cometrue"/>
+	</bean>
+	
+	<!-- sqlSessionFactory를 생성해주는 SqlSessionFactoryBean 객체 설정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml"></property>
+	</bean>
+	
+	<!-- SqlSession이란 RDB에 인증을 거친 논리적인 연결 상태 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
 </beans>
