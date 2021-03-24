@@ -5,5 +5,8 @@
  
  <!-- 네임스페이스 헷갈림 -->
  <mapper namespace="com.hatsnake.spring01.mappers.BoardMapper">
- 
+ <insert id="test1">
+ 	insert into board (no)
+ 	values (2)
+ </insert>
  </mapper>
