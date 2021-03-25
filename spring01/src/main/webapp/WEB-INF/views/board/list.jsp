@@ -7,6 +7,24 @@
 <title>게시판 리스트</title>
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+	$('.move').on('click', function() {
+		var data = $(this).attr('data');
+		console.log(data);
+
+		if(data == 'write') {
+			location.href='/board/write';
+		} else if(data == "view") {
+			var no = $(this).parent('tr').children('td:nth-of-type(1)').html();
+			location.href='/board/view?no='+no;
+			console.log(no);
+		}
+	});
+});
+</script>
+
 </head>
 <body>
 <div class="container">
@@ -26,7 +44,7 @@
 		<tbody>
 			<tr>
 				<td>1</td>
-				<td style="cursor:pointer;">하하</td>
+				<td class="move" style="cursor:pointer;" data="view">하하</td>
 				<td>hatsnake</td>
 				<td>19-01-15</td>
 				<td>0</td>

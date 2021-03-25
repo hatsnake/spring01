@@ -9,4 +9,30 @@
  	insert into board (no)
  	values (2)
  </insert>
+ 
+ <select id="list" resultType="com.hatsnake.spring01.domain.BoardVO">
+ 	select no, id, title, content, gNo, step, indent, count, to_char(bDate, 'yyyy-mm-dd') as bDate 
+ 	from board
+ </select>
+ 
+ <select id="view" resultType="com.hatsnake.spring01.domain.BoardVO">
+  	select no, id, title, content, gNo, step, indent, count, to_char(bDate, 'yyyy-mm-dd') as bDate 
+  	from board where no = #{no}
+ </select>
+ 
+ <insert id="write">
+ 	insert into board(no, id, title, content, gNo, step, indent, count, bDate)
+ 	values (board_no.nextval, #{id}, #{title}, #{content}, board_no.currval, 0, 0, 0, sysdate)
+ </insert>
+ 
+ <update id="replyShape">
+ 	update from board set step = step+1
+ 	where gNo=#{gNo} AND step > #{step}
+ </update>
+ 
+ <insert id="replyWrite">
+ 	insert into board (no, id, title, content, gNo, step, indent, count, bDate)
+ 	values (board_no.nextval, #{id}, #{title}, #{content}, #{gNo}, #{step}+1, #{indent}+1, 0, sysdate)
+ </insert>
+ 
  </mapper>

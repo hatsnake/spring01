@@ -1,5 +1,7 @@
 package com.hatsnake.spring01.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -7,8 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.hatsnake.spring01.dao.BoardDAO;
+import com.hatsnake.spring01.domain.BoardVO;
 
-//����Ͻ� ���� : ������� ������ ������ ������, ����ڰ� �ٶ�� ������� ���� �ڵ�
 @Service //스프링컨테이너가 해당 클래스의 객체 생성 (비즈니스로직 처리)
 public class BoardServiceImpl implements BoardService {
 
@@ -20,6 +22,26 @@ public class BoardServiceImpl implements BoardService {
 	public int test1() {
 		logger.info("service test1");
 		return boardDAO.test1();
+	}
+
+	@Override
+	public List<BoardVO> list() {
+		return boardDAO.list();
+	}
+	
+	@Override
+	public BoardVO view(int no) {
+		return boardDAO.view(no);
+	}
+	
+	@Override
+	public int write(BoardVO boardVO) {
+		if(boardVO.getgNo() == 0) {
+			return boardDAO.write(boardVO);
+		} else {
+			boardDAO.replyShape(boardVO);
+			return boardDAO.replyWrite(boardVO);
+		}
 	}
 	
 }

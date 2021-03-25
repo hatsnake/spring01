@@ -1,11 +1,15 @@
 package com.hatsnake.spring01.dao;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+
+import com.hatsnake.spring01.domain.BoardVO;
 
 @Repository //스프링컨테이너가 해당 클래스의 객체 생성 (데이터베이스 연동 처리
 public class BoardDAOImpl implements BoardDAO {
@@ -23,5 +27,30 @@ public class BoardDAOImpl implements BoardDAO {
 	public int test1() {
 		logger.info("dao test1");
 		return sqlSession.insert(namespace+".test1");
+	}
+
+	@Override
+	public List<BoardVO> list() {
+		return sqlSession.selectList(namespace+".list");
+	}
+
+	@Override
+	public BoardVO view(int no) {
+		return sqlSession.selectOne(namespace+".view", no);
+	}
+	
+	@Override
+	public int write(BoardVO boardVO) {
+		return sqlSession.insert(namespace+".write", boardVO);
+	}
+
+	@Override
+	public void replyShape(BoardVO boardVO) {
+		sqlSession.update(namespace+".replyShape", boardVO);
+	}
+
+	@Override
+	public int replyWrite(BoardVO boardVO) {
+		return sqlSession.insert(namespace+".replyWrite", boardVO);
 	}
 }
