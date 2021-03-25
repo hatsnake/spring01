@@ -42,13 +42,23 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>1</td>
-				<td class="move" style="cursor:pointer;" data="view">하하</td>
-				<td>hatsnake</td>
-				<td>19-01-15</td>
-				<td>0</td>
-			</tr>
+			<c:forEach items="${list}" var="list">
+				<tr>
+					<td>${list.no}</td>
+					<td class="move text-left" style="cursor:pointer;" data="view">
+						<c:if test="${list.indent > 0}">
+							<c:set value="${list.indent * 10}" var="width"/>
+							<img src="/resources/image/blank.png" width="${width}">
+							<span>→</span>
+						</c:if>
+						${list.title}
+					</td>
+					<td>${list.id}</td>
+					<td>${list.bDate}</td>
+					<td>${list.count}</td>
+				</tr>	
+			</c:forEach>
+			
 		</tbody>
 	</table>
 	

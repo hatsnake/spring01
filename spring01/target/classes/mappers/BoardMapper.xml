@@ -12,7 +12,7 @@
  
  <select id="list" resultType="com.hatsnake.spring01.domain.BoardVO">
  	select no, id, title, content, gNo, step, indent, count, to_char(bDate, 'yyyy-mm-dd') as bDate 
- 	from board
+ 	from board order by gNo DESC, step ASC
  </select>
  
  <select id="view" resultType="com.hatsnake.spring01.domain.BoardVO">
@@ -26,7 +26,7 @@
  </insert>
  
  <update id="replyShape">
- 	update from board set step = step+1
+ 	update board set step = step+1
  	where gNo=#{gNo} AND step > #{step}
  </update>
  

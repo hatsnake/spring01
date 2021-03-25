@@ -48,6 +48,7 @@ public class BoardController {
 	public String moveView(Model model, @RequestParam int no) {
 		logger.info("move view");
 		BoardVO board = boardService.view(no);
+		logger.info(board.toString());
 		model.addAttribute("board", board);
 		
 		return "board/view";
