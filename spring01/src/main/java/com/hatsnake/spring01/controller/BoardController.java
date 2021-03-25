@@ -10,35 +10,35 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hatsnake.spring01.service.BoardService;
 
-@Controller //½ºÇÁ¸µÄÁÅ×ÀÌ³Ê°¡ ÇØ´ç Å¬·¡½º °´Ã¼(ºó) »ı¼º (»ç¿ëÀÚÀÇ ¿äÃ» Á¦¾îÇÏ±â À§ÇÑ ¾î³ëÅ×ÀÌ¼Ç)
-@RequestMapping(value="/board") //URLÀ» ÄÁÆ®·Ñ·¯ÀÇ ¸Ş¼Òµå¿Í ¸ÅÇÎÇÏ±â À§ÇÑ ¾î³ëÅ×ÀÌ¼Ç
+@Controller //ìŠ¤í”„ë§ì»¨í…Œì´ë„ˆê°€ í•´ë‹¹ í´ë˜ìŠ¤ ê°ì²´ ìƒì„± (ì‚¬ìš©ì ìš”ì²­ ì œì–´)
+@RequestMapping(value="/board") //URLì„ ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ë©”ì†Œë“œì™€ ë§¤í•‘
 public class BoardController {
 
-	@Inject //°´Ã¼ÀÇ Å¸ÀÔÀÌ ÀÏÄ¡ÇÏ´Â °´Ã¼ ÀÚµ¿ ÁÖÀÔ
+	@Inject //ê°ì²´ì˜ íƒ€ì…ê³¼ ì¼ì¹˜í•˜ëŠ” ê°ì²´ ìë™ ì£¼ì…
 	private BoardService boardService;
-	//loggerÀ» ¾²´Â ÀÌÀ¯ - System.out.println()º¸´Ù ÀÔÃâ·Â¸®¼Ò½º°¡ Àû°Ô µé°í, µû·Î ÆÄÀÏ·Î ÀúÀåÇØ¼­ ºĞ¼®ÇÒ ¼ö ÀÖÀ½
+	//loggerì„ ì“°ëŠ” ì´ìœ  - System.out.println()ë³´ë‹¤ ì…ì¶œë ¥ë¦¬ì†ŒìŠ¤ê°€ ì ê²Œ ë“¤ê³ , ë”°ë¡œ íŒŒì¼ì„ ë§Œë“¤ì–´ ë¶„ì„ ê°€ëŠ¥
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
-	@RequestMapping(value="/test1", method=RequestMethod.GET)
+	@RequestMapping(value="/test1", method=RequestMethod.GET) //URLì„ ì»¨íŠ¸ë¡¤ëŸ¬ì˜ ë©”ì†Œë“œì™€ ë§¤í•‘
 	public String test1() {
 		logger.info("controller test1");
 		int result = boardService.test1();
 		return "";
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET) //URLÀ» ÄÁÆ®·Ñ·¯ÀÇ ¸Ş¼Òµå¿¡ ¸ÅÇÎÇÏ±â À§ÇÑ ¾î³ëÅ×ÀÌ¼Ç
+	@RequestMapping(value="/list", method=RequestMethod.GET) 
 	public String moveList() {
 		logger.info("move list");
 		return "board/list";
 	}
 
-	@RequestMapping(value="/write", method=RequestMethod.GET) //URLÀ» ÄÁÆ®·Ñ·¯ÀÇ ¸Ş¼Òµå¿¡ ¸ÅÇÎÇÏ±â À§ÇÑ ¾î³ëÅ×ÀÌ¼Ç
+	@RequestMapping(value="/write", method=RequestMethod.GET) 
 	public String moveWrite() {
 		logger.info("move write");
 		return "board/write";
 	}
 	
-	@RequestMapping(value="/view", method=RequestMethod.GET) //URLÀ» ÄÁÆ®·Ñ·¯ÀÇ ¸Ş¼Òµå¿¡ ¸ÅÇÎÇÏ±â À§ÇÑ ¾î³ëÅ×ÀÌ¼Ç
+	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String moveView() {
 		logger.info("move view");
 		return "board/view";

@@ -7,14 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-@Repository //╫╨га╦╣даевюлЁй╟║ гь╢Г е╛╥║╫╨ ╟╢ц╪ ╩Щ╪╨ (╣╔юлем╨ёюл╫╨ ©╛╣© цЁ╦╝го╠Б ю╖гя ╬НЁКевюл╪г)
+@Repository //Л┼╓М■└К╖│Л╩╗М┘▄Л²╢К└┬Й╟─ М∙╢К▀╧ М│╢К·≤Л┼╓Л²≤ Й╟²Л╡╢ Л┐²Л└╠ (К█╟Л²╢М└╟К╡═Л²╢Л┼╓ Л≈╟К▐≥ Л╡≤К╕╛
 public class BoardDAOImpl implements BoardDAO {
-	// юга╦╪╨ ажют ╬НЁКевюл╪г
-	// @Autowired : ╟╢ц╪юг е╦ютюл юод║го╢б ╟╢ц╪ юз╣© ажют
-	// @Inject : ╟╢ц╪юг е╦ютюл юод║го╢б ╟╢ц╪ юз╣© ажют
-	// @Resource : ╟╢ц╪юг юл╦╖юл юод║го╢б ╟╢ц╪ юз╣© ажют
-	// @Qualifier : ╩Г©Кгр юга╦ ╟╢ц╪╟║ ©╘╥╞╟Ёюо ╤╖ ╪╠ецго©╘ ╟╢ц╪ юз╣© ажют
-	@Inject //╟╢ц╪юг е╦ютюл юод║го╢б ╟╢ц╪ юз╣© ажют
+	// Л²≤Л║╢Л└╠ Лё╪Л·┘
+	// @Autowired : Й╟²Л╡╢Л²≤ М┐─Л·┘Л²╢ Л²╪Л╧≤М∙≤К┼■ Й╟²Л╡╢ Л·░К▐≥ Лё╪Л·┘
+	// @Inject : Й╟²Л╡╢Л²≤ М┐─Л·┘Л²╢ Л²╪Л╧≤М∙≤К┼■ Й╟²Л╡╢ Л·░К▐≥ Лё╪Л·┘
+	// @Resource : Й╟²Л╡╢Л²≤ Л²╢К╕└
+	// @Qualifier : Й╟²Л╡╢Л²≤ М┐─Л·┘Л²╢ Л²╪Л╧≤М∙≤К┼■ Й╟²Л╡╢Й╟─ К▒░Й╟°Л²╪К∙▄ Л└═М┐²
+	@Inject //Й╟²Л╡╢Л²≤ М┐─Л·┘Л²╢ Л²╪Л╧≤М∙≤К┼■ Й╟²Л╡╢ Л·░К▐≥ Лё╪Л·┘
 	private SqlSession sqlSession;
 	private static final String namespace = "com.hatsnake.spring01.mappers.BoardMapper";
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);

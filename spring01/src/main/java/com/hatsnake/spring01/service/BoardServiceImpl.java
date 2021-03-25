@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.hatsnake.spring01.dao.BoardDAO;
 
-//╨ЯаН╢о╫╨ ╥наВ : ╩Г©Кюзюг ╢╚©║╢б ╨╦юлаЖ ╬йаЖ╦╦, ╩Г©Кюз╟║ ╧ы╤С╢б ╟А╟З╧╟ю╩ ю╖гя дз╣Е
-@Service //╫╨га╦╣даевюлЁй╟║ гь╢Г е╛╥║╫╨ ╟╢ц╪ ╩Щ╪╨ (╨ЯаН╢о╫╨ ╥наВ цЁ╦╝го╠Б ю╖гя ╬НЁКевюл╪г)
+//О©╫О©╫О©╫О©╫о╫О©╫ О©╫О©╫О©╫О©╫ : О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫, О©╫О©╫О©╫О©╫з╟О©╫ О©╫ы╤О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫ О©╫з╣О©╫
+@Service //Л┼╓М■└К╖│Л╩╗М┘▄Л²╢К└┬Й╟─ М∙╢К▀╧ М│╢К·≤Л┼╓Л²≤ Й╟²Л╡╢ Л┐²Л└╠ (К╧└Л╕┬К▀┬Л┼╓К║°Л╖│ Л╡≤К╕╛)
 public class BoardServiceImpl implements BoardService {
 
-	@Inject //╟╢ц╪юг е╦ютюл юод║го╢б ╟╢ц╪ юз╣© ажют
+	@Inject //Й╟²Л╡╢Л²≤ М┐─Л·┘Л²╢ Л²╪Л╧≤М∙≤К┼■ Й╟²Л╡╢ Л·░К▐≥ Лё╪Л·┘
 	private BoardDAO boardDAO;
 	private static final Logger logger = LoggerFactory.getLogger(BoardServiceImpl.class);
 
