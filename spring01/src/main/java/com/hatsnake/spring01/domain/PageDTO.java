@@ -11,6 +11,19 @@ public class PageDTO {
 	private int startPage;
 	private int endPage;
 	
+	public void pageInit() {
+		setPageCount(count / pageSize + (count % pageSize == 0 ? 0 : 1));
+		System.out.println("setPageCount : "+(count / pageSize + (count % pageSize == 0 ? 0 : 1)));
+		setStartPage(((pageNum - 1) / pageBlock) * pageBlock + 1);
+		System.out.println("setStartPage : "+(((pageNum - 1) / pageBlock) * pageBlock + 1));
+		int endPage = startPage + pageBlock - 1;
+		if(endPage > pageCount) {
+			endPage = pageCount;
+		}
+		setEndPage(endPage);
+		System.out.println("setEndPage : "+(startPage + pageBlock - 1));
+	}
+	
 	public int getStartRow() {
 		return startRow;
 	}
@@ -34,6 +47,7 @@ public class PageDTO {
 	}
 	public void setCount(int count) {
 		this.count = count;
+		pageInit();
 	}
 	public int getPageNum() {
 		return pageNum;

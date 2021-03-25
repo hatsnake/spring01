@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hatsnake.spring01.domain.BoardVO;
+import com.hatsnake.spring01.domain.PageDTO;
 import com.hatsnake.spring01.service.BoardService;
 
 @Controller //스프링컨테이너가 해당 클래스 객체 생성 (사용자 요청 제어)
@@ -36,8 +37,19 @@ public class BoardController {
 	@RequestMapping(value="/list", method=RequestMethod.GET) 
 	public String moveList(Model model, @RequestParam(value="pageNum", defaultValue="1") int pageNum) {
 		logger.info("move list");
-		List<BoardVO> list = boardService.list();
+		
+		PageDTO page = new PageDTO();
+		page.setPageNum(pageNum);
+		page.setPageBlock(5);
+		page.setPageSize(30);
+		page.setCount(boardService.count());
+		
+		List<BoardVO> list = boardService.list(page);
+		
+		logger.info(page.toString());
+		
 		model.addAttribute("list", list);
+		model.addAttribute("page", page);
 		
 		return "board/list";
 	}

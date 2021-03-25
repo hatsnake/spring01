@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.hatsnake.spring01.domain.BoardVO;
+import com.hatsnake.spring01.domain.PageDTO;
 
 @Repository //스프링컨테이너가 해당 클래스의 객체 생성 (데이터베이스 연동 처리
 public class BoardDAOImpl implements BoardDAO {
@@ -30,8 +31,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardVO> list() {
-		return sqlSession.selectList(namespace+".list");
+	public List<BoardVO> list(PageDTO page) {
+		return sqlSession.selectList(namespace+".list", page);
 	}
 
 	@Override
@@ -52,5 +53,10 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int replyWrite(BoardVO boardVO) {
 		return sqlSession.insert(namespace+".replyWrite", boardVO);
+	}
+
+	@Override
+	public int count() {
+		return sqlSession.selectOne(namespace+".count");
 	}
 }

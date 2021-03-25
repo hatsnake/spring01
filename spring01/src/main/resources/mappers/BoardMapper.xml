@@ -3,7 +3,6 @@
  PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
- <!-- 네임스페이스 헷갈림 -->
  <mapper namespace="com.hatsnake.spring01.mappers.BoardMapper">
  <insert id="test1">
  	insert into board (no)
@@ -11,8 +10,17 @@
  </insert>
  
  <select id="list" resultType="com.hatsnake.spring01.domain.BoardVO">
- 	select no, id, title, content, gNo, step, indent, count, to_char(bDate, 'yyyy-mm-dd') as bDate 
- 	from board order by gNo DESC, step ASC
+ 	select X.no, X.id, X.title, X.content, X.gNo, X.step, X.indent, 
+ 	X.count, to_char(X.bDate, 'yyyy-mm-dd') as bDate 
+ 	from 
+ 	(select rownum as rnum, A.* from (select * from board order by gNo DESC, step ASC) A
+ 	<![CDATA[
+ 		where rownum <= ${endRow}
+ 	]]>
+ 	) X
+ 	<![CDATA[
+ 		where X.rnum >= ${startRow}
+ 	]]>
  </select>
  
  <select id="view" resultType="com.hatsnake.spring01.domain.BoardVO">
@@ -34,5 +42,10 @@
  	insert into board (no, id, title, content, gNo, step, indent, count, bDate)
  	values (board_no.nextval, #{id}, #{title}, #{content}, #{gNo}, #{step}+1, #{indent}+1, 0, sysdate)
  </insert>
+ 
+ <select id="count" resultType="int">
+ 	select count(*) from board
+ </select>
+	
  
  </mapper>

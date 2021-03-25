@@ -62,17 +62,51 @@ $(document).ready(function() {
 		</tbody>
 	</table>
 	
-	<ul class="pagination" style="margin-left:42%;">
-		<li class="page-item">
-			<a class="page-link" href="#">1</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">2</a>
-		</li>
-		<li class="page-item">
-			<a class="page-link" href="#">3</a>
-		</li>				
-	</ul>
+	<div class="text-center">
+		<ul class="pagination" style="margin-left:42%;">
+			<c:choose>
+				<c:when test="${page.startPage > page.pageBlock}">
+					<li class="page-item">
+						<a class="page-link" href="/board/list?pageNum=${page.startPage-1}">&lt;&lt;</a>
+					</li>
+				</c:when>
+				<c:otherwise></c:otherwise>
+			</c:choose>
+	
+			<c:choose>
+				<c:when test="${page.pageNum > 1}">
+					<li class="page-item">
+						<a class="page-link" href="/board/list?pageNum=${page.pageNum-1}">&lt;</a>
+					</li>
+				</c:when>
+				<c:otherwise></c:otherwise>
+			</c:choose>
+		
+			<c:forEach begin="${page.startPage}" end="${page.endPage}" step="1" var="i">
+				<li class="page-item <c:if test="${i eq page.pageNum}">active</c:if>">
+					<a class="page-link" href="/board/list?pageNum=${i}">${i}</a>
+				</li>		
+			</c:forEach>
+			
+			<c:choose>
+				<c:when test="${page.pageNum < page.pageCount}">
+					<li class="page-item">
+						<a class="page-link" href="/board/list?pageNum=${page.pageNum+1}">&gt;</a>
+					</li>
+				</c:when>
+				<c:otherwise></c:otherwise>		
+			</c:choose>
+			
+			<c:choose>
+				<c:when test="${page.endPage < page.pageCount}">
+					<li class="page-item">
+						<a class="page-link" href="/board/list?pageNum=${page.endPage+1}">&gt;&gt;</a>
+					</li>
+				</c:when>
+				<c:otherwise></c:otherwise>		
+			</c:choose>	
+		</ul>
+	</div>
 </div>
 </body>
 </html>

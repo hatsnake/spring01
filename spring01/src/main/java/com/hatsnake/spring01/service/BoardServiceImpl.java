@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.hatsnake.spring01.dao.BoardDAO;
 import com.hatsnake.spring01.domain.BoardVO;
+import com.hatsnake.spring01.domain.PageDTO;
 
 @Service //스프링컨테이너가 해당 클래스의 객체 생성 (비즈니스로직 처리)
 public class BoardServiceImpl implements BoardService {
@@ -25,8 +26,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> list() {
-		return boardDAO.list();
+	public List<BoardVO> list(PageDTO page) {
+		page.setStartRow((page.getPageNum() - 1) * page.getPageSize() + 1);
+		page.setEndRow(page.getStartRow() + page.getPageSize() - 1);
+		return boardDAO.list(page);
 	}
 	
 	@Override
@@ -42,6 +45,11 @@ public class BoardServiceImpl implements BoardService {
 			boardDAO.replyShape(boardVO);
 			return boardDAO.replyWrite(boardVO);
 		}
+	}
+
+	@Override
+	public int count() {
+		return boardDAO.count();
 	}
 	
 }
