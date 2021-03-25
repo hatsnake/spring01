@@ -19,6 +19,7 @@ public class BoardController {
 	//logger을 쓰는 이유 - System.out.println()보다 입출력리소스가 적게 들고, 따로 파일을 만들어 분석 가능
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
+	//테스트 메소드
 	@RequestMapping(value="/test1", method=RequestMethod.GET) //URL을 컨트롤러의 메소드와 매핑
 	public String test1() {
 		logger.info("controller test1");
@@ -26,21 +27,32 @@ public class BoardController {
 		return "";
 	}
 	
+	//리스트 페이지 이동
 	@RequestMapping(value="/list", method=RequestMethod.GET) 
 	public String moveList() {
 		logger.info("move list");
 		return "board/list";
 	}
 
+	//작성 페이지 이동
 	@RequestMapping(value="/write", method=RequestMethod.GET) 
 	public String moveWrite() {
 		logger.info("move write");
 		return "board/write";
 	}
 	
+	//보기 페이지 이동
 	@RequestMapping(value="/view", method=RequestMethod.GET)
 	public String moveView() {
 		logger.info("move view");
 		return "board/view";
 	}
+	
+	@RequestMapping(value="/write", method=RequestMethod.POST)
+	public String writePro() {
+		logger.info("writePro");
+		
+		return "redirect:/board/list";
+	}
+	
 }
