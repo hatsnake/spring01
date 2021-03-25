@@ -25,4 +25,22 @@ public class BoardController {
 		int result = boardService.test1();
 		return "";
 	}
+	
+	@RequestMapping(value="/list", method=RequestMethod.GET) //URL을 컨트롤러의 메소드에 매핑하기 위한 어노테이션
+	public String moveList() {
+		logger.info("move list");
+		return "board/list";
+	}
+
+	@RequestMapping(value="/write", method=RequestMethod.GET) //URL을 컨트롤러의 메소드에 매핑하기 위한 어노테이션
+	public String moveWrite() {
+		logger.info("move write");
+		return "board/write";
+	}
+	
+	@RequestMapping(value="/view", method=RequestMethod.GET) //URL을 컨트롤러의 메소드에 매핑하기 위한 어노테이션
+	public String moveView() {
+		logger.info("move view");
+		return "board/view";
+	}
 }
