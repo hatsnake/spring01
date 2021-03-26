@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- beans는 붙혀넣기함 (안하면 http 태그에서 에러남 -->
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	<!-- 스프링 시큐리티 기본 로그인페이지 제공 (커스텀 가능) -->
+	<http auto-config='true'>
+		<!-- ROLE_ADMIN만 모든 접근 권한 가짐 -->
+		<intercept-url pattern="/**" access="ROLE_ADMIN"/>
+	</http>
+	<!-- 유저 접근 권한 설정 -->
+	<authentication-manager>
+		<authentication-provider>
+			<user-service>
+				<user name="admin" password="1234" authorities="ROLE_USER, ROLE_ADMIN"/>
+				<user name="guest" password="1234" authorities="ROLE_USER"/>
+				<user name="guest2" password="a1234" authorities="ROLE_USER"/>
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
+
+</beans:beans>

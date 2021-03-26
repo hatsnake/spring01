@@ -43,8 +43,6 @@ public class BoardController {
 		
 		List<BoardVO> list = boardService.list(page);
 		
-		logger.info(page.toString());
-		
 		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		
@@ -88,7 +86,6 @@ public class BoardController {
 	@ResponseBody //리턴값으로 뷰를 출력하지 않고 값이 출력
 	@RequestMapping(value="/writeComments", method=RequestMethod.POST)
 	public String writeReply(CommentsVO commentsVO) {
-		logger.info(commentsVO.toString());
 		int result = boardService.writeComments(commentsVO);
 		return Integer.toString(result);
 	}
