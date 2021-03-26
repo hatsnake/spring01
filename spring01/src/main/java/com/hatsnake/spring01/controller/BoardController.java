@@ -4,15 +4,20 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.hatsnake.spring01.domain.BoardVO;
+import com.hatsnake.spring01.domain.CommentsVO;
 import com.hatsnake.spring01.domain.PageDTO;
 import com.hatsnake.spring01.service.BoardService;
 
@@ -24,14 +29,6 @@ public class BoardController {
 	private BoardService boardService;
 	//logger을 쓰는 이유 - System.out.println()보다 입출력리소스가 적게 들고, 따로 파일을 만들어 분석 가능
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
-
-	//테스트 메소드 (사용X)
-	@RequestMapping(value="/test1", method=RequestMethod.GET) //URL을 컨트롤러의 메소드와 매핑
-	public String test1() {
-		logger.info("controller test1");
-		int result = boardService.test1();
-		return "";
-	}
 	
 	//게시판 리스트 페이지 이동
 	@RequestMapping(value="/list", method=RequestMethod.GET) 
@@ -60,8 +57,9 @@ public class BoardController {
 	public String moveView(Model model, @RequestParam int no) {
 		logger.info("move view");
 		BoardVO board = boardService.view(no);
-		logger.info(board.toString());
+		List<CommentsVO> comments = boardService.listComments(no);
 		model.addAttribute("board", board);
+		model.addAttribute("comments", comments);
 		
 		return "board/view";
 	}
@@ -84,6 +82,38 @@ public class BoardController {
 		
 		
 		return "redirect:/board/list";
+	}
+	
+	/* AJAX방식으로 댓글 작성 */
+	@ResponseBody //리턴값으로 뷰를 출력하지 않고 값이 출력
+	@RequestMapping(value="/writeComments", method=RequestMethod.POST)
+	public String writeReply(CommentsVO commentsVO) {
+		logger.info(commentsVO.toString());
+		int result = boardService.writeComments(commentsVO);
+		return Integer.toString(result);
+	}
+	
+	/* AJAX방식으로 댓글 리스트 출력 */
+	//produces : 명시한 MediaType과 같을때에 해당 type으로 응답을 보내준다.
+	@ResponseBody
+	@RequestMapping(value="/listComments", method= {RequestMethod.POST}, produces="application/json; charset=UTF-8")
+	public String listComments(@RequestParam int bNo) {
+		List<CommentsVO> list = boardService.listComments(bNo);
+		
+		JSONObject obj = new JSONObject();
+		JSONArray array = new JSONArray();
+		for(int i=0; i<list.size(); i++) {
+			JSONObject value = new JSONObject();
+			value.put("no", list.get(i).getNo());
+			value.put("bNo", list.get(i).getbNo());
+			value.put("id", list.get(i).getId());
+			value.put("content", list.get(i).getContent());
+			value.put("cDate", list.get(i).getcDate());
+			array.add(value);
+		}
+		obj.put("result", array);
+		System.out.println(obj.toString());
+		return obj.toString();
 	}
 	
 }

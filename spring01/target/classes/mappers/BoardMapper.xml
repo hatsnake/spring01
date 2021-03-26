@@ -47,5 +47,15 @@
  	select count(*) from board
  </select>
 	
+ <insert id="writeComments">
+ 	insert into comments(no, bNo, id, content, cDate)
+ 	values (comments_no.nextval, #{bNo}, #{id}, #{content}, sysdate)
+ </insert>
+ 
+ <select id="listComments" resultType="com.hatsnake.spring01.domain.CommentsVO">
+ 	select no, bNo, id, content, to_char(cDate, 'yyyy-mm-dd') as cDate 
+ 	from comments where bNo = #{bNo} 
+ 	order by no ASC
+ </select>
  
  </mapper>

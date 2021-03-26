@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.hatsnake.spring01.domain.BoardVO;
+import com.hatsnake.spring01.domain.CommentsVO;
 import com.hatsnake.spring01.domain.PageDTO;
 
 @Repository //스프링컨테이너가 해당 클래스의 객체 생성 (데이터베이스 연동 처리
@@ -23,12 +24,6 @@ public class BoardDAOImpl implements BoardDAO {
 	private SqlSession sqlSession;
 	private static final String namespace = "com.hatsnake.spring01.mappers.BoardMapper";
 	private static final Logger logger = LoggerFactory.getLogger(BoardDAOImpl.class);
-	
-	@Override
-	public int test1() {
-		logger.info("dao test1");
-		return sqlSession.insert(namespace+".test1");
-	}
 
 	@Override
 	public List<BoardVO> list(PageDTO page) {
@@ -58,5 +53,15 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public int count() {
 		return sqlSession.selectOne(namespace+".count");
+	}
+
+	@Override
+	public int writeComments(CommentsVO commentsVO) {
+		return sqlSession.insert(namespace+".writeComments", commentsVO);
+	}
+
+	@Override
+	public List<CommentsVO> listComments(int bNo) {
+		return sqlSession.selectList(namespace+".listComments", bNo);
 	}
 }
