@@ -19,5 +19,11 @@ $(document).ready(function() {
 <body>
 	<h2>메인화면</h2>
 	<button class="btn btn-primary mb-2 ml-1 board">게시판 이동</button>
+	
+	<p>
+		<div>회사코드 : ${cpcode}</div>
+		<div>사번 : ${cdstf}</div>
+		<div>이름 : ${username}</div>
+	</p>
 </body>
 </html>
